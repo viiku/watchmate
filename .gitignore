@@ -1,0 +1,5 @@
+db.sqlite3
+watchlist_app/__pycache__
+watchlist_app/__init__.py
+watchlist_app/migrations
+watchlist_app/api/__pycache__
