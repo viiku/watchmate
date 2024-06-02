@@ -21,10 +21,10 @@ urlpatterns = [
     # path('review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),
     
     # should create review of movie with id
-    path('stream/<int:pk>/review-create/', ReviewCreate.as_view(), name='review-create'),
+    path('<int:pk>/review-create', ReviewCreate.as_view(), name='review-create'),
     # should return all review of movie with id
-    path('stream/<int:pk>/review/', ReviewList.as_view(), name='review-list'),
+    path('<int:pk>/reviews', ReviewList.as_view(), name='review-list'),
     # should return review with particular id
-    path('stream/review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),    
+    path('review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),    
     
 ]

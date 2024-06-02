@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
 # from rest_framework import mixins
 from rest_framework.exceptions import ValidationError
+from watchlist_app.api.permissions import AdminOrReadOnly, ReviewUserOrReadOnly
 
 # from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -28,6 +29,14 @@ class ReviewCreate(generics.CreateAPIView):
         if review_queryset.exists():
             raise ValidationError("You've already Reviewed")
         
+        if watchList.number_of_rating == 0:
+            watchList.avg_rating = serializer.validated_data['rating']
+        else:
+            watchList.avg_rating = (watchList.avg_rating + serializer.validated_data['rating'])/2
+        
+        watchList.number_of_rating = watchList.number_of_rating + 1
+        watchList.save()
+        
         serializer.save(watchList=watchList, review_user=review_user)
     
 class ReviewList(generics.ListCreateAPIView):
@@ -41,6 +50,7 @@ class ReviewList(generics.ListCreateAPIView):
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all();
     serializer_class = ReviewSerializer
+    permission_classes = [ReviewUserOrReadOnly]
 
 # class ReviewDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
 #     queryset = Review.objects.all()
