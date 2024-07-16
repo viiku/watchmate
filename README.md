@@ -1,1 +1,1 @@
-README file about this project. 
+This is a tutorial project for creating rest apis using djnago rest framework (DRF).
