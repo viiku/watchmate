@@ -1,1 +1,1 @@
-This is a tutorial project for creating rest apis using djnago rest framework (DRF).
+This is a tutorial project for creating rest apis using djnago rest framework (DRF) for IMDB site.
